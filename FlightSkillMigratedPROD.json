@@ -1,0 +1,93 @@
+{
+    "$schema": "https://raw.githubusercontent.com/microsoft/botframework-sdk/master/schemas/skills/skill-manifest-2.0.0.json",
+    "$id": "FlightSkillMigratedBot",
+    "name": "Flight Skill Migrated Bot",
+    "version": "1.0",
+    "description": "This is a sample flight skill definition",
+    "publisherName": "Microsoft",
+    "privacyUrl": "https://myskill.contoso.com/privacy.html",
+    "copyright": "Copyright (c) Microsoft Corporation. All rights reserved.",
+    "license": "",
+    "iconUrl": "https://myskill.contoso.com/icon.png",
+    "tags": [
+        "sample",
+        "flight"
+    ],
+    "endpoints": [
+        {
+            "name": "Prod",
+            "protocol": "BotFrameworkV3",
+            "description": "Prod  endpoint for SkillBot in the Americas",
+            "endpointUrl": "https://flightskillbot.azurewebsites.net/api/messages",
+            "msAppId": "131b7027-5829-45c1-a25f-13841c770ae9"
+        }
+    ],
+    "activities": {
+        "bookFlight": {
+            "description": "Books a flight",
+            "type": "event",
+            "name": "BookFlight",
+            "resultValue": {
+                "$ref": "#/definitions/bookingResult"
+            }
+        },
+        "getService": {
+            "description": "Gets service based on employee id",
+            "type": "event",
+            "name": "GetService",
+            "value": {
+                "$ref": "#/definitions/getServiceInput"
+            },
+            "resultValue": {
+                "$ref": "#/definitions/getServiceOutput"
+            }
+        },
+        "passThroughtMessage" :{
+            "type": "message",
+            "description": "This action passes the text to the skill for LUIS to recozgnies"
+        }
+    },
+    "definitions": {
+        "getServiceInput": {
+            "type": "object",
+            "required": [
+            ],
+            "properties": {
+                "id": {
+                    "type": "number",
+                    "description": "customer id"
+                }
+            }
+        },
+        "getServiceOutput": {
+            "type": "object",
+            "required": [
+            ],
+            "properties": {
+                "address": {
+                    "type": "string",
+                    "description": "customer address"
+                },
+                "service": {
+                    "type": "string",
+                    "description": "customer requested service"
+                }
+            }
+        },
+        "bookingResult": {
+            "type": "object",
+            "required": [
+            ],
+            "properties": {
+                "flightNumber": {
+                    "type": "string",
+                    "description": "this is the origin city for the flight"
+                },
+                "details": {
+                    "type": "string",
+                    "description": "this is the destination city for the flight"
+                }
+            }
+        }
+    }
+}
